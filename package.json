@@ -1,0 +1,36 @@
+{
+  "name": "testresult-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'"
+  },
+  "engines": {
+    "node": "8.11.4"
+  },
+  "author": "Rapunzel",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^7.1.9",
+    "mongodb": "^2.2.36",
+    "mongoose": "^4.13.17",
+    "save": "^2.3.2",
+    "validator": "^5.6.0"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^3.0.2",
+    "nodemon": "^1.10.2",
+    "supertest": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/goldylocks87/nominee/issues"
+  },
+  "homepage": "https://github.com/goldylocks87/nominee#readme",
+  "description": ""
+}
