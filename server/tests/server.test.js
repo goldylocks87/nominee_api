@@ -150,7 +150,7 @@ describe('PATCH /nominees/:id', () => {
                 Nominee.findById(nominees[0]._id)
                 .then((nominees) => {
                     expect(nominees)
-                    .toExist();
+                    .toBeTruthy();
                     expect(nominees.votes)
                     .toEqual(updatedNominee.votes);
                     
@@ -177,7 +177,7 @@ describe('PATCH /nominees/:id', () => {
                 Nominee.findById(nominees[0]._id)
                 .then((nominees) => {
                     expect(nominees.votes)
-                    .toNotEqual(updatedNominee.votes);
+                    .not.toBe(updatedNominee.votes);
                     
                     done();
                 }).catch((err) => done(err));
@@ -199,7 +199,7 @@ describe('DELETE /nominees/:id', () => {
                 Nominee.findById(nominees[0]._id)
                 .then((nominees) => {
                     expect(nominees)
-                    .toNotExist();
+                    .toBeFalsy();
                     
                     done();
                 }).catch((err) => done(err));
@@ -274,8 +274,8 @@ describe('POST /users', () => {
 
                 User.findOne({email: newUser.email})
                 .then((user) => {
-                    expect(user).toExist();
-                    expect(user.password).toNotBe(newUser.password);
+                    expect(user).toBeTruthy();
+                    expect(user.password).not.toBe(newUser.password);
                     done();
                 }).catch(err => done(err));
             });
@@ -319,7 +319,7 @@ describe('POST /users/login', () => {
             .expect(200)
             .expect((res) => {
                 expect(res.headers['x-auth'])
-                .toExist();
+                .toBeTruthy();
             })
             .end((err, res) => {
                 if (err) done(err);
@@ -346,7 +346,7 @@ describe('POST /users/login', () => {
             .expect(400)
             .expect((res) => {
                 expect(res.headers['x-auth'])
-                .toNotExist();
+                .toBeFalsy();
             })
             .end((err, res) => {
                 if (err) done(err);
@@ -370,7 +370,7 @@ describe('DELETE /users/me/token', () => {
             .expect(200)
             .expect((res) => {
                 expect(res.headers['x-auth'])
-                .toNotExist();
+                .toBeFalsy();
             })
             .end((err, res) => {
                 if (err) done(err);
