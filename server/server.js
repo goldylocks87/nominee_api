@@ -93,6 +93,28 @@ app.patch('/nominees/:id', authenticate, (req, res) => {
     }).catch(err => console.error(err)); 
 });
 
+app.put('/nominees/:id/:vote', authenticate, (req, res) => {
+
+    let id = req.params.id;
+    let newVote = req.params.vote;
+
+    if( !ObjectId.isValid(id) ){
+        return res.status(404).send({error: 'Could not find that ish...'}); 
+    }
+
+    Nominee.findOneAndUpdate(
+        {_id: id, _creator: req.user._id}, 
+        {$inc: {votes: newVote}}, 
+        {new: true})
+    .then((nominees) => {
+        if(!nominees) res.status(404).send({error: 'Could not find that ish...'}); 
+        else res.send({nominees});
+
+    }, (err) => {
+        res.status(400).send({error: 'Bad shit happened...'})
+    }).catch(err => console.error(err)); 
+});
+
 app.post('/users', (req, res) => {
 
     // pick off props that we want users to be able to set
